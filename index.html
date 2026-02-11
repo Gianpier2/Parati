@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti 💌</title>
+
+<!-- Fuentes -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background: radial-gradient(circle at top, #f5e6d3, #e8d2b8 70%);
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#000;
+  font-family:'Poppins', sans-serif;
+}
+
+.page{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:0.8s ease;
+  pointer-events:none;
+}
+
+.page.active{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+  z-index:10;
+}
+
+h1{
+  font-family:'Playfair Display', serif;
+  font-size:2.8rem;
+  margin-bottom:20px;
+  letter-spacing:1px;
+}
+
+p{
+  font-size:1.2rem;
+  max-width:600px;
+  line-height:1.8;
+}
+
+button{
+  margin-top:40px;
+  padding:14px 32px;
+  font-size:1rem;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(135deg,#d4a373,#e6c7a1);
+  color:white;
+  cursor:pointer;
+  transition:0.35s;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  letter-spacing:1px;
+  font-family:'Poppins', sans-serif;
+}
+
+button:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+}
+
+/* FLOR */
+
+.flower{
+  width:200px;
+  height:200px;
+  margin-top:30px;
+}
+
+svg{
+  width:100%;
+  height:100%;
+}
+
+.stem{
+  stroke:#6db37c;
+  stroke-width:4;
+  stroke-dasharray:200;
+  stroke-dashoffset:200;
+  animation:growStem 2s ease forwards;
+}
+
+.petal{
+  fill:#f6a5b7;
+  opacity:0;
+  transform-origin:center;
+  animation:bloom 1.5s ease forwards;
+}
+
+.petal:nth-child(2){animation-delay:2s;}
+.petal:nth-child(3){animation-delay:2.2s;}
+.petal:nth-child(4){animation-delay:2.4s;}
+.petal:nth-child(5){animation-delay:2.6s;}
+
+.center{
+  fill:#fff4ec;
+  opacity:0;
+  animation:fadeIn 1s ease forwards;
+  animation-delay:3s;
+}
+
+@keyframes growStem{
+  to{stroke-dashoffset:0;}
+}
+
+@keyframes bloom{
+  0%{transform:scale(0);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Página 1 -->
+<div class="page active">
+  <h1 id="saludo1"></h1>
+  <p>Tengo algo especial para ti…</p>
+  <button onclick="nextPage()">Continuar</button>
+</div>
+
+<!-- Página 2 -->
+<div class="page">
+  <h1 id="saludo2"></h1>
+  <p>
+    sentí que muchas cosas empezaron a ser más bonitas.
+  </p>
+  <button onclick="nextPage()">Siguiente</button>
+</div>
+
+<!-- Página 3 -->
+<div class="page">
+  <h1>Quería decirte algo…</h1>
+  <p>
+    No es cualquier cosa.<br>
+    Es algo que he estado preparando con mucho cariño.
+  </p>
+  <button onclick="nextPage()">Ver</button>
+</div>
+
+<!-- Página 4 -->
+<div class="page">
+  <h1>Porque eres especial 🌙</h1>
+  <p>
+    Y cada momento contigo
+    se siente único.
+  </p>
+  <button onclick="nextPage()">Hay más…</button>
+</div>
+
+<!-- Página 5 FLOR -->
+<div class="page">
+  <h1 id="florTxt"></h1>
+
+  <div class="flower">
+    <svg viewBox="0 0 200 200">
+
+      <line x1="100" y1="200" x2="100" y2="110" class="stem"/>
+
+      <circle cx="100" cy="80" r="25" class="petal"/>
+      <circle cx="75" cy="100" r="25" class="petal"/>
+      <circle cx="125" cy="100" r="25" class="petal"/>
+      <circle cx="85" cy="60" r="25" class="petal"/>
+      <circle cx="115" cy="60" r="25" class="petal"/>
+
+      <circle cx="100" cy="80" r="12" class="center"/>
+
+    </svg>
+  </div>
+
+  <button onclick="nextPage()">Continuar</button>
+</div>
+
+<!-- Página 6 -->
+<div class="page">
+  <h1>Y ahora…</h1>
+  <p>Hay algo que quiero preguntarte.</p>
+  <button onclick="nextPage()">Ver pregunta</button>
+</div>
+
+<!-- Página 7 -->
+<div class="page">
+  <h1 id="pregunta"></h1>
+  <div style="display:flex; gap:20px; margin-top:30px;">
+    <button onclick="mostrarRespuesta()">Sí</button>
+    <button id="noBtn" onmouseover="moverNo()">No</button>
+  </div>
+</div>
+
+<!-- Página 8 -->
+<div class="page">
+  <h1 style="font-family:'Dancing Script', cursive; font-size:3rem;" id="finalTxt"></h1>
+  <p>Gracias por hacerme tan feliz…</p>
+</div>
+
+<script>
+
+const nombre = "Rosangela";
+
+// Textos dinámicos
+
+document.getElementById("saludo1").innerText =
+  "Hola, " + nombre + " ✨";
+
+
+document.getElementById("saludo2").innerText =
+  "Porque desde que llegaste a mi vida, " + nombre + "… ✨";
+
+
+document.getElementById("florTxt").innerText =
+  "Una flor para ti, " + nombre + " ";
+
+
+document.getElementById("pregunta").innerText =
+  nombre + "… ¿Quieres ser mi San Valentín? ";
+
+
+document.getElementById("finalTxt").innerText =
+  "Sabía que dirías que sí, " + nombre + " ";
+
+
+const pages=document.querySelectorAll('.page');
+let current=0;
+
+function showPage(index){
+  pages.forEach(page=>page.classList.remove('active'));
+  pages[index].classList.add('active');
+}
+
+function nextPage(){
+  if(current<pages.length-1){
+    current++;
+    showPage(current);
+  }
+}
+
+function mostrarRespuesta(){
+  nextPage();
+}
+
+function moverNo(){
+  const btn=document.getElementById('noBtn');
+  const x=Math.random()*200-100;
+  const y=Math.random()*200-100;
+  btn.style.transform=`translate(${x}px,${y}px)`;
+}
+
+</script>
+
+</body>
+</html>
